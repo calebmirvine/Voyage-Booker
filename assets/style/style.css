@@ -1,0 +1,167 @@
+:root {
+    --rich-black: #0d1b2a;
+    --oxford-blue: #1b263b;
+    --yinmn-blue: #415a77;
+    --silver-lake-blue: #778da9;
+    --platinum: #e0e1ddff;
+}
+* {
+    font-family: 'Courier New', Courier;
+}
+
+
+
+body {
+    background-color: var(--oxford-blue);
+    color: var(--platinum);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.5;
+}
+#headerParent {
+    background-color: var(--yinmn-blue);
+    color: var(--platinum);
+}
+
+
+
+.offcanvas{
+    background-color: var(--silver-lake-blue);
+    color: var(--platinum);
+}
+.btnOffcanvas{
+    width: 25%;
+    background-color: var(--silver-lake-blue);
+    color: var(--platinum);
+    border-radius: 10px 10px 0px 0px;
+    font-size: 1.25rem;
+    text-shadow: var(--oxford-blue) 1px 1px;
+    border: var(--rich-black) 5px;
+    border-bottom: 0px;
+    border-style: double;
+}
+
+.btnOffcanvas:hover{
+    background-color: var(--silver-lake-blue);
+    border: var(--rich-black) 5px;
+    border-style: double;
+    color: var(--platinum);
+    transition: 300ms ease-in-out;
+}
+.offcanvas-header{
+    border-top: var(--rich-black) 5px double;
+}
+
+
+.leaflet-popup-tip-container {
+    display: none;
+}
+.popupCustom .leaflet-popup-content-wrapper{
+    color: var(--rich-black);
+    font-size:16px;
+    line-height:24px;
+}
+.popupSun .leaflet-popup-content-wrapper{
+    background: linear-gradient(to bottom, #457eba, #4979bf);
+    color: var(--platinum);
+    font-size:16px;
+    line-height:24px;
+}
+.popupClouds .leaflet-popup-content-wrapper{
+    background: linear-gradient(to bottom, #707b87, var(--silver-lake-blue));
+    color: var(--platinum);
+    font-size:16px;
+    line-height:24px;
+}
+.popupRain .leaflet-popup-content-wrapper {
+    background: linear-gradient(to bottom, #57595d, #456192);
+    color: var(--platinum);
+    font-size:16px;
+    line-height:24px;
+}
+.popupNight .leaflet-popup-content-wrapper {
+    background: linear-gradient(to bottom, var(--rich-black), var(--oxford-blue), var(--yinmn-blue));
+    color: var(--platinum);
+    font-size:16px;
+    line-height:24px;
+}
+.sunCycle {
+    height: 50px;
+}
+.tzFont{
+    font-size: 12px;
+}
+
+.portBtn{
+    height: 34px;
+}
+
+#filterContainer{
+    border-bottom: var(--rich-black) double 15px;
+}
+#boatSelection{
+    background-color: var(--yinmn-blue);
+
+}
+#boatSelection .container-fluid{
+    padding: 3rem;
+}
+.trip-card{
+    width: 60%;
+}
+#btnEndTrip{
+    position: absolute;
+    right: 1rem;
+    bottom: -1rem;
+    z-index: 3;
+}
+
+#boatSelectionParent{
+    position: relative;
+}
+
+@media (max-width: 1000px) {
+    .btnOffcanvas {
+        width: 75%;
+    }
+    #boatSelection .container-fluid{
+        padding: .5rem;
+        padding-bottom: .1rem;
+    }
+    .trip-card{
+        width: 95%;
+    }
+}
+
+.flipped {
+    transform: scaleX(-1);
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 99;
+}
+
+
+.cart-item, #checkoutCart li{
+    background-color: #456192;
+    color: white;
+    font-size: 1.25rem;
+}
+.cart-item:nth-child(even), #checkoutCart li:nth-child(even){
+    background-color: #1d334e;
+}
+
+/*#fullMap:hover {*/
+/*    cursor: pointer;*/
+/*    border: 2px solid var(--platinum);*/
+/*    border-radius: 10px;*/
+/*}*/
+

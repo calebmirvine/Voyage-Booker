@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags and Page Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage Booker | ICS128 - Final Project</title>
+<!--    Favi-->
+   <link rel="icon" href="./assets/images/ship_icon_empty.svg" type="image/svg+xml">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- My Style Sheets -->
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/custom-classes.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--Fix masonry-->
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+   <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v3.0.1/maptiler-sdk.umd.min.js"></script>
+
+    <!-- map Tiler -->
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v3.0.1/maptiler-sdk.css" rel="stylesheet" />
+    <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v4.0.2/leaflet-maptilersdk.umd.min.js"></script>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+     <style>#map {min-height: 75vh; }</style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/@sjaakp/leaflet-search/dist/leaflet-search.js/"></script>
+
+    <!--    Leaflet Plugins-->
+    <!--    This stupid leaflet notifcation plugin told me more about npm and how to use unpkg and what it does... very cool-->
+    <script src="https://unpkg.com/leaflet-notifications/js/leaflet-notifications.min"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-notifications/css/leaflet-notifications.min.css"></link>
+    <script src='https://unpkg.com/leaflet.marker.slideto/Leaflet.Marker.SlideTo.js'></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.fullscreen/Control.FullScreen.css" />
+    <script src="https://unpkg.com/leaflet.fullscreen/Control.FullScreen.js"></script>
+    <script src="https://unpkg.com/leaflet-responsive-popup@1.0.0/leaflet.responsive.popup.js"></script>
+    <script src="https://unpkg.com/leaflet.nauticscale/dist/leaflet.nauticscale.min.js"></script>
+    <script src='https://unpkg.com/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.js'></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.3/dist/bundle.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div id="headerParent" class="px-3 py-2 border-bottom" style="height: 5vh;">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center text-center">
+                        <h1>Voyage Booker  <img src="./assets/images/ship_icon_empty.svg" class=" mx-auto mb-1" width="24" height="24" aria-hidden="true" alt="boat icon"></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section>
+                <div class="container-fluid h-100 p-0">
+                    <div id="map" class="d-flex justify-content-center align-items-center">
+                            <img id="loadingMap" class="mb-3 mx-auto" src="./assets/images/compass.svg" style="height: 150px;"/>
+                    </div>
+                    <div class="trip-info-container container text-center w-100 p-1 d-flex justify-content-center flex-wrap" style="min-height:20vh;">
+                        <h1>Where will you voyage?</h1>
+                    </div>
+                </div>
+                <button class="btn btnOffcanvas fixed-bottom start-50 translate-middle-x" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                    View Cart <i class="bi bi-cart4 d-inline mx-auto mb-1" aria-hidden="true"></i></button>
+                    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                        <button style="top: -14%;" type="button" class="btn btnOffcanvas rounded-bottom-0 border-bottom-0 position-absolute start-50 translate-middle-x"  data-bs-dismiss="offcanvas">
+                            <i class="bi bi-chevron-double-down d-block mx-auto mb-1" aria-hidden="true"></i></button>
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title fw-bold fs-1" id="offcanvasBottomLabel">Your Cart <i class="bi bi-cart4 d-inline mx-auto mb-1" aria-hidden="true"></i></h5>
+                        </div>
+                        <div class="offcanvas-body small cart-body">
+                    </div>
+                </div>
+        </section>
+        <section id="boatSelectionParent">
+            <div class="overlay"><h1 class="text-center sticky-top text-white mt-2">Please Map Voyage First</h1></div>
+            <div id="boatSelection">
+                <div class="container-fluid ">
+                    <div id="filterContainer" class="row mb-5 pb-3 d-flex">
+                        <div class="col-lg-3  col-sm-12 text my-auto">
+                            <p>You may not have multiple vessels of the same name</p>
+                        </div>
+                        <div class="text-center col-lg-6 col-sm-12">
+                            <h1 id="#catalogTitle" class="fw-bold" style="font-size: 3.5rem">Select A Vessel</h1>
+                        </div>
+                        <div class="col-lg-3  col-sm-12">
+                            <div class="input-group w-auto">
+                                <div class="input-group-text">
+                                    <i class="bi bi-filter-right mt-1"></i>
+                                </div>
+                                <select id="mnuSortVessels" class="form-select"  aria-label="Sort Vessel Selection">
+                                    <option value="" selected>Filter Vessels By...</option>
+                                    <option value="type" >Boat Type</option>
+                                    <option value="duration_desc">↑↓ High to Low: Sail Duration</option>
+                                    <option value="duration_asc">↓↑ Low to High: Sail Duration</option>
+                                    <option value="cost_to_client_desc">↑↓ High to Low: Total Cost</option>
+                                    <option value="cost_to_client_asc">↓↑ Low to High: Total Cost</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div id="catalog" class="row d-flex" data-masonry='{"percentPosition": true }'>
+                <!-- Boats will be here -->
+                </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header bg-richBlack">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Complete Journey</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                        </div>
+                        <div class="modal-body  bg-silverLakeBlue text-white">
+                            <div class="container">
+                                <div class="py-5 text-center">
+                                    <img class="d-block mx-auto mb-4" src="./assets/images/ship_icon_empty.svg" alt="" width="72" height="72">
+                                    <h2 id="checkOutDesc">Confirm & Complete Order</h2>
+                                </div>
+
+                                <div class="row">
+                                    <div id='checkoutCart' class="col-md-4 order-md-2 mb-4">
+<!--                                    FINAL CHECKOUT STUFF HERE-->
+                                    </div>
+                                    <div class="col-md-8 order-md-1">
+                                        <h4 class="mb-3">Billing address</h4>
+                                        <form class="checkoutForm needs-validation" novalidate="">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="firstName">First name</label>
+                                                    <input type="text" class="form-control" id="firstName" placeholder="" value="">
+                                                    <div class="invalid-feedback">
+                                                        Valid first name is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="lastName">Last name</label>
+                                                    <input type="text" class="form-control" id="lastName" placeholder="" value="">
+                                                    <div class="invalid-feedback">
+                                                        Valid last name is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email">Email <span class="text-muted" ></span></label>
+                                                <input type="text" class="form-control" id="email" placeholder="you@example.com">
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid email address for invoice.
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone">Phone <span class="text-muted" ></span></label>
+                                                <input type="text" class="form-control" id="phone" placeholder="you@example.com">
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid phone number.
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="address">Address</label>
+                                                <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                                                <div class="invalid-feedback">
+                                                    Please enter your billing address.
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="city">City <span class="text-muted"></span></label>
+                                                <input type="text" class="form-control" id="city" placeholder="Victoria">
+                                                <div class="invalid-feedback">
+                                                    Please enter city
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5 mb-3">
+                                                    <label for="country">Country</label>
+                                                    <select class="custom-select d-block w-100" id="country">
+                                                        <option value="">Choose...</option>
+                                                        <option>Canada</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid country.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="province">Province</label>
+                                                  <select class="custom-select d-block w-100" id="province">
+                                                      <option value="">Choose...</option>
+                                                      <option>Alberta</option>
+                                                      <option>British Columbia</option>
+                                                      <option>Manitoba</option>
+                                                      <option>New Brunswick</option>
+                                                      <option>Newfoundland and Labrador</option>
+                                                      <option>Nova Scotia</option>
+                                                      <option>Ontario</option>
+                                                      <option>Prince Edward Island</option>
+                                                      <option>Quebec</option>
+                                                      <option>Saskatchewan</option>
+                                                  </select>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid province.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="postal">Postal</label>
+                                                    <input type="text" class="form-control" id="postal" placeholder="">
+                                                    <div class="invalid-feedback">
+                                                        Postal code required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="mb-4">
+                                            <h4 class="mb-3">Payment</h4>
+                                            <div class="d-block my-3">
+                                                <div class="custom-control custom-radio">
+                                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="">
+                                                    <label class="custom-control-label" for="credit">Credit card</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="debit">Debit card</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="cc-number">Credit card number</label>
+                                                    <input type="text" class="form-control" id="cc-number" placeholder="">
+                                                    <div class="invalid-feedback">
+                                                        Credit card number is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="cc-expiration">Expiration</label>
+                                                    <input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY">
+                                                    <div class="invalid-feedback">
+                                                        Expiration date required
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="cc-expiration">CVV</label>
+                                                    <input type="text" class="form-control" id="cc-cvv" placeholder="">
+                                                    <div class="invalid-feedback">
+                                                        Security code required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="mb-4">
+                                            <button id="completeCheckout" class="btn btn-primary btn-lg btn-block" type="button">Continue to checkout</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<script src="./assets/scripts/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<!-- This is Turf JS. it is helping set up our boundaries of Land and Water-->
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+</body>
+</html>

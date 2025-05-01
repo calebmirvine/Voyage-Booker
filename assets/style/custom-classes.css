@@ -1,0 +1,83 @@
+:root {
+    --rich-black: #0d1b2a;
+    --oxford-blue: #1b263b;
+    --yinmn-blue: #415a77;
+    --silver-lake-blue: #778da9;
+    --platinum: #e0e1ddff;
+}
+* {
+    font-family: 'Courier New', Courier;
+}
+.text-richBlack{
+    color: var(--rich-black);
+}
+.bg-richBlack{
+    background-color: var(--rich-black);
+}
+.text-darkBlue{
+    color: var(--oxford-blue);
+}
+.bg-darkBlue{
+    background-color: var(--oxford-blue);
+}
+.text-yinmnBlue {
+    color: var(--yinmn-blue);
+}
+.bg-yinmnBlue {
+    background-color: var(--yinmn-blue);
+}
+.text-silverBlue {
+    color: var(--silver-lake-blue);
+}
+.bg-silverLakeBlue {
+    background-color: var(--silver-lake-blue);
+}
+.text-platinum {
+    color: var(--platinum);
+}
+.bg-platinum {
+    background-color: var(--platinum);
+}
+
+.btn-primary {
+    color: var(--platinum);
+    background-color: var(--oxford-blue);
+    border: 2px solid var(--rich-black);
+    border-radius: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    transition: 300ms ease-in-out;
+    padding-bottom: 5px;
+    letter-spacing: 2px;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    color: var(--platinum);
+    background-color: var(--yinmn-blue);
+    border: 2px solid var(--yinmn-blue);
+    border-radius: 5px;
+    transform: scale(1.01);
+}
+
+.btn-secondary {
+    color: var(--platinum);
+    background-color: var(--yinmn-blue);
+    border: 2px solid var(--oxford-blue);
+    border-radius: 5px;
+    padding-bottom: 5px;
+    transform: scale(1.01);
+    transition: 300ms ease-in-out;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    background-color: var(--silver-lake-blue);
+    color: var(--platinum);
+    transform: scale(1.05);
+}
+
+.w-fit{
+    width: fit-content
+}
