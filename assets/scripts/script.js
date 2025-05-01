@@ -39,9 +39,8 @@
 
 // global variables
 const TAX_RATE = 0.05;
-const AZUREKEY = process.env.AZUREKEY;
-const MAPTILERKEY = process.env.MAPTILERKEY;
-
+const AZUREKEY = 'CocXxa9ttOwPiYjh2LobanHG7bW8F911GTm2OlLKYfUwAFVa3tGeJQQJ99BCACYeBjFsuc1mAAAgAZMP1gRC';
+const MAPTILERKEY = 'M9Lb1wDn8WfXKX67TE8s';
 
 $(document).ready(() => {
     // Default Location Interurban Campus
