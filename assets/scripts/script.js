@@ -37,10 +37,15 @@
 //= ============================LEAFLET KNOWLEDGE ⬇️=============================
 //= ============================ASYNC AWAIT ✅=============================
 
+
+
 // global variables
 const TAX_RATE = 0.05;
-const AZUREKEY = 'CocXxa9ttOwPiYjh2LobanHG7bW8F911GTm2OlLKYfUwAFVa3tGeJQQJ99BCACYeBjFsuc1mAAAgAZMP1gRC';
-const MAPTILERKEY = 'M9Lb1wDn8WfXKX67TE8s';
+
+//Since this is a static site on github pages, the API keys are hard coded but are only allowed to the page origin from GitHub Pages
+//If this were a real project, these keys would be stored in a .env file and not be pushed to github for security reasons
+const AZURE_KEY='1McOBFEe2qS79j7pbLpwERcnZ7Yg4uqSxiBanuCDJmQDrPXu2XR1JQQJ99CAAC8vTInsuc1mAAAgAZMPHmZ4'
+const MAP_TILER_KEY="z652sic9PwAiUaWoLEvh"
 
 $(document).ready(() => {
     // Default Location Interurban Campus
@@ -101,7 +106,7 @@ $(document).ready(() => {
         // Add the tile layer
         //API Maptiler for a diffrent "nautial" map tilelayer
 //= ============================LEAFLET KNOWLEDGE ⬇️=============================
-        L.tileLayer(`https://api.maptiler.com/maps/ocean/{z}/{x}/{y}.png?key=${MAPTILERKEY}`, { // style URL
+        L.tileLayer(`https://api.maptiler.com/maps/ocean/{z}/{x}/{y}.png?key=${MAP_TILER_KEY}`, { // style URL
             tileSize: 512,
             zoomOffset: -1,
             minZoom: 1,
@@ -451,8 +456,8 @@ $(document).ready(() => {
                 (async () => {
                     try {
                         const [data1, data2] = await Promise.all([
-                            fetch(`https://atlas.microsoft.com/timezone/byCoordinates/json?api-version=1.0&options=all&query=${lat},${long}&subscription-key=${AZUREKEY}`),
-                            fetch(`https://atlas.microsoft.com/weather/currentConditions/json?api-version=1.0&query=${lat},${long}&subscription-key=${AZUREKEY}`),
+                            fetch(`https://atlas.microsoft.com/timezone/byCoordinates/json?api-version=1.0&options=all&query=${lat},${long}&subscription-key=${AZURE_KEY}`),
+                            fetch(`https://atlas.microsoft.com/weather/currentConditions/json?api-version=1.0&query=${lat},${long}&subscription-key=${AZURE_KEY}`),
                         ]);
                         const timeZoneData = await data1.json();
                         const weatherData = await data2.json();
