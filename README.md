@@ -1,8 +1,6 @@
----
-
 # Voyage Booker ⚓
 
-### Live Demo: [https://calebmirvine.github.io/ICS128-Final_Project/]
+### Live Demo: [[https://calebmirvine.github.io/ICS128-Final_Project/](https://calebmirvine.github.io/ICS128-Final_Project/)]
 
 **Voyage Booker** is a Single Page Application (SPA) that allows users to plan nautical trips and rent vessels based on real-time weather conditions and route metrics.
 
@@ -28,7 +26,8 @@
 
 ## 💡 Skills Demonstrated
 
+* **API Security & Cloud Configuration:** Configured strict **HTTP Origin (CORS)** restrictions on Azure and MapTiler dashboards to secure exposed API keys in a serverless, static hosting environment.
 * **Third-Party API Integration:** Managing API keys, handling HTTP responses, and parsing complex JSON data.
 * **DOM Manipulation:** Extensive use of jQuery for dynamic content rendering and UI updates.
 * **Error Handling:** Implementation of `try...catch...finally` blocks to ensure application stability during network requests.
-* **Vector Graphics:** Custom manipulation of SVGs for dynamic map markers.
+* **Vector Graphics:** Custom manipulation of SVGs for dynamic and scalable map markers.
