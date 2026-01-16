@@ -1,5 +1,3 @@
-Here is a concise, recruiter-friendly version. It focuses on keywords, technical implementation, and skimmability.
-
 ---
 
 # Voyage Booker ⚓
