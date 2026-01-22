@@ -30,4 +30,4 @@
 * **Third-Party API Integration:** Managing API keys, handling HTTP responses, and parsing complex JSON data.
 * **DOM Manipulation:** Extensive use of jQuery for dynamic content rendering and UI updates.
 * **Error Handling:** Implementation of `try...catch...finally` blocks to ensure application stability during network requests.
-* **Vector Graphics:** Custom manipulation of SVGs for dynamic and scalable map markers.
+* **Vector Graphics:** Custom manipulation of SVGs for scalable map markers.
