@@ -1,7 +1,5 @@
 # Voyage Booker ⚓
 
-### Live Demo: [[https://calebmirvine.github.io/ICS128-Final_Project/](https://calebmirvine.github.io/ICS128-Final_Project/)]
-
 **Voyage Booker** is a Single Page Application (SPA) that allows users to plan nautical trips and rent vessels based on real-time weather conditions and route metrics.
 
 ## 🛠️ Tech Stack
